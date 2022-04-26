@@ -1,0 +1,14 @@
+#include <string>
+#include <fstream>
+#include <cstring>
+#include <vector>
+
+#include <Token/tokens.h>
+
+#ifndef LEXICAL_ANALYZER_H
+#define LEXICAL_ANALYZER_H
+
+Token getNextToken(std::ifstream *file, int *curLine, int *curPos);
+std::vector<Token> Analyze(std::ifstream &sourcecode);
+
+#endif
