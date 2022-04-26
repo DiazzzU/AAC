@@ -9,6 +9,10 @@ include_directories(${PROJECT_SOURCE_DIR})
 file(GLOB allSRC
      "*.h"
      "*.cpp"
+     "*/*.cpp"
+     "*/*.h"
+     "*/*/*.cpp"
+     "*/*/*.h"
 )
 
 add_executable(AAC main.cpp ${allSRC})

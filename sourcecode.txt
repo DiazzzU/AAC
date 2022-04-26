@@ -1,0 +1,17 @@
+(func P (a b) (plus a b))
+(P 1 2)
+
+a = 4
+b = 3
+(plus a b)
+
+FuncInvocation('plus', (Var a), (Var b))
+
+nodeDeclaration:
+    name
+    parameters[]
+    expression
+
+nodeInvovation:
+    declartion
+    parmeters[]

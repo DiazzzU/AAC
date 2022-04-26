@@ -8,7 +8,9 @@
 using namespace std;
 
 int main() {
-    ifstream sourcecode ("sourcecode.txt");
-
+    ifstream sourcecode ("../sourcecode.txt");
     vector<Token> tokenList = Analyze(sourcecode);
+    for (auto x : tokenList) {
+        cout << TokenEnumNames[x.code] << ' ';
+    }
 }

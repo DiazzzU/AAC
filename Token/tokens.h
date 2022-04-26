@@ -1,57 +1,52 @@
 #include <string>
 
-#ifndef COMPILER_TOKENS_H
-#define COMPILER_TOKENS_H
+#ifndef TOKENS_H
+#define TOKENS_H
 
 enum Code {
-    tokOpenParenthesis, // 0
-    tokCloseParenthesis, // 1
-    tokOpenBracket, // 2
-    tokCloseBracket, // 3
-    tokSlash, // 4
-    tokQuote, // 5
-    tokSetq, // 6
-    tokFunc, // 7
-    tokLambda, // 8
-    tokProg, // 9
-    tokCond, // 10
-    tokWhile, // 11
-    tokReturn, // 12
-    tokBreak, // 13
-    tokEqual, // 14
-    tokNonEqual, // 15
-    tokLess, // 16
-    tokLessEq, // 17
-    tokGreater, // 18
-    tokGreaterEq, // 19
-    tokIsInt, // 20
-    tokIsReal, // 21
-    tokIsBool, // 22
-    tokIsNull, // 23
-    tokIsAtom, // 24
-    tokIsList, // 25
-    tokAnd, // 26
-    tokOr, // 27
-    tokXor, // 28
-    tokNot, // 29
-    tokTrue, // 30
-    tokFalse, // 31
-    tokPlus, // 32
-    tokMinus, // 33
-    tokTimes, // 34
-    tokDivide, // 35
-    tokHead, // 36
-    tokTail, // 37
-    tokCons, // 38
-    tokEval, // 39
-    tokInt, // 40
-    tokReal, // 41
-    tokBoolean, // 42
-    tokAtom, // 43
-    tokList, // 44
-    tokRoot, // 45
-    tokEndFile, // 46
-    tokFunction // 47
+    tokenInt, // 0
+    tokenReal, // 1
+    tokenBoolean, // 2
+    tokenString, // 3
+    tokenOpenParenthesis, // 6
+    tokenCloseParenthesis, // 7
+    tokenOpenBracket, // 8
+    tokenCloseBracket, // 9
+    tokenQuote, // 10
+    tokenSetq, // 11
+    tokenFunc, // 12
+    tokenCond, // 13
+    tokenFor, // 14
+    tokenForList, // 15
+    tokenEqual, // 16
+    tokenNonEqual, // 17
+    tokenLess, // 18
+    tokenLessEq, // 19
+    tokenGreater, // 20
+    tokenGreaterEq, // 21
+    tokenIsInt, // 22
+    tokenIsReal, // 23
+    tokenIsBool, // 24
+    tokenIsString, // 25
+    tokenIsList, // 26
+    tokenAnd, // 27
+    tokenOr, // 28
+    tokenXor, // 29
+    tokenNot, // 30
+    tokenTrue, // 31
+    tokenFalse, // 32
+    tokenPlus, // 33
+    tokenMinus, // 34
+    tokenMul, // 35
+    tokenDiv, // 36
+    tokenHead, // 37
+    tokenTail, // 38
+    tokenCons, // 39
+    tokenRest, // 40
+    tokenEmpty, // 41
+    tokenList, // 42
+    tokenRoot, // 43
+    tokenEndFile,
 };
 
 struct Location {
@@ -63,7 +58,7 @@ struct Value {
     int intVal;
     double realVal;
     bool boolVal;
-    std::string atomVal;
+    std::string stringVal;
 };
 
 struct Token {
@@ -72,4 +67,50 @@ struct Token {
     Location location;
 };
 
-#endif //COMPILER_TOKENS_H
+const std::string TokenEnumNames [] = {
+    [tokenInt] = "tokenInt",
+    [tokenReal] = "tokenReal",
+    [tokenBoolean] = "tokenBoolean",
+    [tokenString] = "tokenString",
+    [tokenOpenParenthesis] = "tokenOpenParenthesis",
+    [tokenCloseParenthesis] = "tokenCloseParenthesis",
+    [tokenOpenBracket] = "tokenOpenBracket",
+    [tokenCloseBracket] = "tokenCloseBracket",
+    [tokenQuote] = "tokenQuote",
+    [tokenSetq] = "tokenSetq",
+    [tokenFunc] = "tokenFunc",
+    [tokenCond] = "tokenCond",
+    [tokenFor] = "tokenCond",
+    [tokenForList] = "tokenForList",
+    [tokenEqual] = "tokenEqual",
+    [tokenNonEqual] = "tokenNonEqual",
+    [tokenLess] = "tokenLess",
+    [tokenLessEq] = "tokenLessEq",
+    [tokenGreater] = "tokenGreater",
+    [tokenGreaterEq] = "tokenGreaterEq",
+    [tokenIsInt] = "tokenIsInt",
+    [tokenIsReal] = "tokenIsReal",
+    [tokenIsBool] = "tokenIsBool",
+    [tokenIsString] = "tokenIsString",
+    [tokenIsList] = "tokenIsList",
+    [tokenAnd] = "tokenAnd",
+    [tokenOr] = "tokenOr",
+    [tokenXor] = "tokenXor",
+    [tokenNot] = "tokenNot",
+    [tokenTrue] = "tokenTrue",
+    [tokenFalse] = "tokenFalse",
+    [tokenPlus] = "tokenPlus",
+    [tokenMinus] = "tokenMinus",
+    [tokenMul] = "tokenMul",
+    [tokenDiv] = "tokenDiv",
+    [tokenHead] = "tokenHead",
+    [tokenTail] = "tokenTail",
+    [tokenCons] = "tokenCons",
+    [tokenRest] = "tokenRest",
+    [tokenEmpty] = "tokenEmpty",
+    [tokenList] = "tokenList",
+    [tokenRoot] = "tokenRoot",
+    [tokenEndFile] = "tokenEndFile",
+};
+
+#endif
