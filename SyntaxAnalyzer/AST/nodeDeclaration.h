@@ -7,41 +7,26 @@
 
 class NodeDeclaration: public Node {
 public:
-    std::string type;
     std::string name;
-    std::vector <Node*> parameters;
-    Node* expression;
+    std::string type;
 
     NodeDeclaration() {
         this->nodeType = "Declaration";
     }
 
-    virtual std::string getType() {
-        return type;
-    }
-    virtual std::string getName() {
+    std::string getName() {
         return name;
     }
-    virtual std::vector <Node*> getParameters() {
-        return parameters;
-    }
-    virtual Node* getExpression() {
-        return expression;
+    std::string getType() {
+        return type;
     }
 
-    virtual void setType(std::string x) {
-        this->type = x;
-    }
-    virtual void setExpression(Node* expression) {
-        this->expression = expression;
-    }
-    virtual void setName(std::string name) {
+    void setName(std::string name) {
         this->name = name;
     }
-    virtual void addParameter(Node* node) {
-        parameters.push_back(node);
+    void setType(std::string type) {
+        this->type = type;
     }
-
 };
 
 #endif //COMPILER_NODEDECLARATION_H

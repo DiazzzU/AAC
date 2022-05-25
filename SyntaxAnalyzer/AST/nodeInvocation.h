@@ -10,29 +10,43 @@ public:
     std::string name;
     std::vector<Node*> parameters;
     Node* declaration;
+    std::string type;
 
     NodeInvocation() {
         this->nodeType = "Invocation";
     }
 
-    virtual std::string getName() {
+    std::string getName() {
         return name;
     }
-    virtual std::vector <Node*> getParameters() {
+    std::vector <Node*> getParameters() {
         return parameters;
     }
-    virtual Node* getDeclaration() {
+    Node* getDeclaration() {
         return declaration;
     }
+    std::string getType() {
+        return type;
+    }
 
-    virtual void setDeclaration(Node* declaration) {
+    void setDeclaration(Node* declaration) {
         this->declaration = declaration;
     }
-    virtual void setName(std::string name) {
+    void setName(std::string name) {
         this->name = name;
     }
-    virtual void addParameter(Node* node) {
+    void addParameter(Node* node) {
         parameters.push_back(node);
+    }
+    void setType(std::string type) {
+        this->type = type;
+    }
+
+
+    Node* codegen(Memory* memory) {
+        if (name == "plus") {
+            Node* parameters[0].codegen();
+        }
     }
 };
 

@@ -4,49 +4,67 @@
 #define TOKENS_H
 
 enum Code {
-    tokenInt, // 0
-    tokenReal, // 1
-    tokenBoolean, // 2
-    tokenString, // 3
-    tokenOpenParenthesis, // 6
-    tokenCloseParenthesis, // 7
-    tokenOpenBracket, // 8
-    tokenCloseBracket, // 9
-    tokenQuote, // 10
-    tokenSetq, // 11
-    tokenFunc, // 12
-    tokenCond, // 13
-    tokenFor, // 14
-    tokenForList, // 15
-    tokenEqual, // 16
-    tokenNonEqual, // 17
-    tokenLess, // 18
-    tokenLessEq, // 19
-    tokenGreater, // 20
-    tokenGreaterEq, // 21
-    tokenIsInt, // 22
-    tokenIsReal, // 23
-    tokenIsBool, // 24
-    tokenIsString, // 25
-    tokenIsList, // 26
-    tokenAnd, // 27
-    tokenOr, // 28
-    tokenXor, // 29
-    tokenNot, // 30
-    tokenTrue, // 31
-    tokenFalse, // 32
-    tokenPlus, // 33
-    tokenMinus, // 34
-    tokenMul, // 35
-    tokenDiv, // 36
-    tokenHead, // 37
-    tokenTail, // 38
-    tokenCons, // 39
-    tokenRest, // 40
-    tokenEmpty, // 41
-    tokenList, // 42
-    tokenRoot, // 43
+    tokenInt, 
+    tokenReal, 
+    tokenBoolean, 
+    tokenString, 
+    tokenOpenParenthesis, 
+    tokenCloseParenthesis, 
+    tokenOpenSquareBracket, 
+    tokenCloseSquareBracket, 
+    tokenOpenCurlyBracket,
+    tokenCloseCurlyBracket,
+    tokenSet,
+    tokenLet, 
+    tokenDefine, 
+    tokenCond, 
+    tokenFor, 
+    tokenForList, 
+    tokenEqual, 
+    tokenNonEqual, 
+    tokenLess, 
+    tokenLessEq, 
+    tokenGreater, 
+    tokenGreaterEq, 
+    tokenIsInt, 
+    tokenIsReal, 
+    tokenIsBool, 
+    tokenIsString, 
+    tokenIsList, 
+    tokenAnd, 
+    tokenOr, 
+    tokenXor, 
+    tokenNot, 
+    tokenTrue, 
+    tokenFalse, 
+    tokenPlus, 
+    tokenMinus, 
+    tokenMul, 
+    tokenDiv, 
+    tokenHead, 
+    tokenTail, 
+    tokenCons, 
+    tokenRest,
+    tokenEmpty, 
+    tokenList, 
+    tokenAppend, 
+    tokenRoot, 
     tokenEndFile,
+    tokenQuote,
+    tokenType,
+    tokenArray,
+    tokenArrayRem,
+    tokenArrayGet,
+    tokenArrayAdd,
+    tokenArraySet,
+    tokenRecord,
+    tokenRecordKeywords,
+    tokenRecordValues,
+    tokenRecordField,
+    tokenReadLine,
+    tokenDoubleQuote,
+    tokenSemicolon,
+    tokenRightArrow
 };
 
 struct Location {
@@ -74,11 +92,11 @@ const std::string TokenEnumNames [] = {
     [tokenString] = "tokenString",
     [tokenOpenParenthesis] = "tokenOpenParenthesis",
     [tokenCloseParenthesis] = "tokenCloseParenthesis",
-    [tokenOpenBracket] = "tokenOpenBracket",
-    [tokenCloseBracket] = "tokenCloseBracket",
-    [tokenQuote] = "tokenQuote",
-    [tokenSetq] = "tokenSetq",
-    [tokenFunc] = "tokenFunc",
+    [tokenOpenSquareBracket] = "tokenOpenSquareBracket",
+    [tokenCloseSquareBracket] = "tokenCloseSquareBracket",
+    [tokenSet] = "tokenSet",
+    [tokenLet] = "tokenLet",
+    [tokenDefine] = "tokenDefine",
     [tokenCond] = "tokenCond",
     [tokenFor] = "tokenCond",
     [tokenForList] = "tokenForList",
@@ -109,8 +127,24 @@ const std::string TokenEnumNames [] = {
     [tokenRest] = "tokenRest",
     [tokenEmpty] = "tokenEmpty",
     [tokenList] = "tokenList",
+    [tokenAppend] = "tokenAppend",
     [tokenRoot] = "tokenRoot",
     [tokenEndFile] = "tokenEndFile",
+    [tokenQuote] = "tokenQuote",
+    [tokenType] = "tokenType",
+    [tokenArray] = "tokenArray",
+    [tokenArrayRem] = "tokenArrayRem",
+    [tokenArrayGet] = "tokenArrayGet",
+    [tokenArrayAdd] = "tokenArrayAdd",
+    [tokenArraySet] = "tokenArraySet",
+    [tokenRecord] = "tokenRecord",
+    [tokenRecordKeywords] = "tokenRecordKeywords",
+    [tokenRecordValues] = "tokenRecordValues",
+    [tokenRecordField] = "tokenRecordField",
+    [tokenReadLine] = "tokenReadLine",
+    [tokenDoubleQuote] = "tokenDoubleQuote",
+    [tokenSemicolon] = "tokenSemicolon",
+    [tokenRightArrow] = "tokenRightArrow"
 };
 
 #endif

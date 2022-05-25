@@ -25,13 +25,21 @@ Token getNextToken(std::ifstream *file, int *curLine, int *curPos) {
     (*curPos) ++;
     tokenLetters += file->get();
 
-    if (tokenLetters != "(" && tokenLetters != ")" && tokenLetters != "[" && tokenLetters != "]" &&
-        tokenLetters != "\'" && tokenLetters != "\n") {
-        while (file->peek() != ' ' && file->peek() != '(' && file->peek() != ')' && file->peek() != '[' &&
-               file->peek() != ']' && file->peek() != EOF && file->peek() != '\n') {
+    if (tokenLetters != "(" && tokenLetters != ")" && tokenLetters != "[" && 
+            tokenLetters != "]" && tokenLetters != "\'" && tokenLetters != "\n" && 
+                tokenLetters != "}" && tokenLetters != "{" && tokenLetters != "\"" && 
+                    tokenLetters != ":") {
+
+        while (tokenLetters != "->" && file->peek() != ' ' && file->peek() != '(' && 
+                    file->peek() != ')' && file->peek() != '[' && file->peek() != ']' && 
+                        file->peek() != EOF && file->peek() != '\n' && file->peek() != '}' && 
+                            file->peek() != '{' && file->peek() != '\"' && file->peek() != ':') {
+
             tokenLetters += file->get();
             (*curPos) ++;
+
         }
+
     }
 
     if (tokenLetters == "(") {
@@ -39,17 +47,27 @@ Token getNextToken(std::ifstream *file, int *curLine, int *curPos) {
     } else if (tokenLetters == ")") {
         token.code = tokenCloseParenthesis;
     } else if (tokenLetters == "[") {
-        token.code = tokenOpenBracket;
+        token.code = tokenOpenSquareBracket;
     } else if (tokenLetters == "]") {
-        token.code = tokenCloseBracket;
+        token.code = tokenCloseSquareBracket;
+    } else if (tokenLetters == "{") {
+        token.code = tokenOpenCurlyBracket;
+    } else if (tokenLetters == "}") {
+        token.code = tokenCloseCurlyBracket;
     } else if (tokenLetters == "\'") {
         token.code = tokenQuote;
-    } else if (tokenLetters == "quote") {
-        token.code = tokenQuote;
-    } else if (tokenLetters == "setq") {
-        token.code = tokenSetq;
-    } else if (tokenLetters == "func") {
-        token.code = tokenFunc;
+    } else if (tokenLetters == "\"") {
+        token.code = tokenDoubleQuote;
+    } else if (tokenLetters == ":") {
+        token.code = tokenSemicolon;
+    } else if (tokenLetters == "->") {
+        token.code = tokenRightArrow;
+    } else if (tokenLetters == "set") {
+        token.code = tokenSet;
+    } else if (tokenLetters == "let") {
+        token.code = tokenLet;
+    } else if (tokenLetters == "define") {
+        token.code = tokenDefine;
     } else if (tokenLetters == "cond") {
         token.code = tokenCond;
     } else if (tokenLetters == "for") {
@@ -90,6 +108,9 @@ Token getNextToken(std::ifstream *file, int *curLine, int *curPos) {
     } else if (tokenLetters == "false") {
         token.code = tokenBoolean;
         token.value.boolVal = false;
+    } else if (tokenLetters == "else") {
+        token.code = tokenBoolean;
+        token.value.boolVal = true;
     } else if (tokenLetters == "plus") {
         token.code = tokenPlus;
     } else if (tokenLetters == "minus") {
@@ -110,6 +131,45 @@ Token getNextToken(std::ifstream *file, int *curLine, int *curPos) {
         token.code = tokenEmpty;
     } else if (tokenLetters == "list") {
         token.code = tokenList;
+    } else if (tokenLetters == "String") {
+        token.code = tokenType;
+        token.value.stringVal = tokenLetters;
+    } else if (tokenLetters == "Integer") {
+        token.code = tokenType;
+        token.value.stringVal = tokenLetters;
+    } else if (tokenLetters == "Real") {
+        token.code = tokenType;
+        token.value.stringVal = tokenLetters;
+    } else if (tokenLetters == "List") {
+        token.code = tokenType;
+        token.value.stringVal = tokenLetters;
+    } else if (tokenLetters == "Boolean") {
+        token.code = tokenType;
+        token.value.stringVal = tokenLetters;
+    } else if (tokenLetters == "Array") {
+        token.code = tokenType;
+        token.value.stringVal = tokenLetters;
+    } else if (tokenLetters == "Keyword") {
+        token.code = tokenType;
+        token.value.stringVal = tokenLetters;
+    } else if (tokenLetters == "array") {
+        token.code = tokenArray;
+    } else if (tokenLetters == "array-rem") {
+        token.code = tokenArrayRem;
+    } else if (tokenLetters == "array-get") {
+        token.code = tokenArrayGet;
+    } else if (tokenLetters == "array-add") {
+        token.code = tokenArrayAdd;
+    } else if (tokenLetters == "array-set") {
+        token.code = tokenArraySet;
+    } else if (tokenLetters == "record") {
+        token.code = tokenRecord;
+    } else if (tokenLetters == "record-keywords") {
+        token.code = tokenRecordKeywords;
+    } else if (tokenLetters == "record-values") {
+        token.code = tokenRecordValues;
+    } else if (tokenLetters == "record-field") {
+         token.code = tokenRecordField;
     } else if (isdigit(tokenLetters[0])) {
         bool real = false;
         bool integer = true;
@@ -134,6 +194,7 @@ Token getNextToken(std::ifstream *file, int *curLine, int *curPos) {
         token.code = tokenString;
         token.value.stringVal = tokenLetters;
     }
+    token.value.stringVal = tokenLetters;
     return token;
 }
 

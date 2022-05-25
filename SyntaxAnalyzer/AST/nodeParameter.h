@@ -8,7 +8,7 @@
 class NodeParameter: public Node {
 public:
     std::string name;
-    Node* declaration;
+    std::string type;
 
     NodeParameter() {
         this->nodeType = "Parameter";
@@ -17,15 +17,15 @@ public:
     virtual std::string getName() {
         return name;
     }
-    virtual Node* getDeclaration() {
-        return declaration;
+    virtual std::string getType() {
+        return type;
     }
 
     virtual void setName(std::string name) {
         this->name = name;
     }
-    virtual void setDeclaration(Node* x) {
-        declaration = x;
+    virtual void setType(std::string x) {
+        type = x;
     }
 };
 

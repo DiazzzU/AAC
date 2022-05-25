@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <map>
+#include <SyntaxAnalyzer/AST/memory.h>
 
 class Node {
 public:
@@ -33,9 +35,24 @@ public:
     virtual bool getBooleanVal(){
         return 0;
     }
+    virtual std::string getStringVal(){
+        return "";
+    }
     virtual std::string getType(){
         return "";
     }   
+    virtual Node* getBody(){
+        return NULL;
+    }
+    virtual std::vector<Node*> getExpressions(){
+        return std::vector<Node*>();
+    }
+    virtual std::vector <Node*> getArrayVal() {
+        return std::vector<Node*>();
+    }
+    virtual std::map < std::string, Node*> getRecordVal() {
+        return std::map < std::string, Node*>();
+    }
 
     virtual void setDeclaration(Node* node){
         
@@ -58,12 +75,35 @@ public:
     virtual void setBooleanVal(bool x){
 
     }
+     virtual void setStringVal(std::string x){
+       
+    }
     virtual void addListVal(Node* x){
 
     }
     virtual void setType(std::string x){
         
     }
+    virtual void setBody(Node* body){
+
+    }
+    virtual void addExpression(Node* expression){
+
+    }
+    virtual void addArrayVal(Node* val){
+
+    }
+    virtual void addRecordVal(std::string key, Node* val){
+
+    }
+
+    virtual Node* codegen(Memory* memory) {
+        return NULL;
+    };
+    virtual void print() {
+
+    }
+
 };
 
 #endif //COMPILER_NODE_H
