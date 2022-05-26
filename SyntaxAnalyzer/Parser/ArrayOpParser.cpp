@@ -24,5 +24,6 @@ Node* ArrayOpParser(Parser *parser, int *tokenNumber) {
     if (currentToken.code == tokenArrayAdd || currentToken.code == tokenArraySet) {
         nodeArray->addParameter(ElementParser(parser, tokenNumber));
     }
+    (*tokenNumber) ++;
     return nodeArray;
 }

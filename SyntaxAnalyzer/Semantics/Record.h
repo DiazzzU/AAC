@@ -27,6 +27,7 @@ public:
         for (auto x : recordVal) {
             std::cout << x.first << ":";
             x.second->print();
+            std::cout << ' ';
         }
         std::cout << ")";
     }

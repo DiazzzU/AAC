@@ -1,3 +1,16 @@
+(define correctTests ()) {
+    (cond[(checkLetSet) "Let ans set are correct"] [else "Let ans set are incorrect"])
+    (cond[(checkCond) "Condition is correct"] [else "Condition is incorrect"])
+    (cond[(checkArithmetic) "Arithmetic is correct"] [else "Arithmetic is incorrect"])
+    (cond[(checkList) "List is correct"] [else "List is incorrect"])
+    (cond[(checkFor) "For is correct"] [else "For is incorrect"])
+    (cond[(checkArray) "Array is correct"] [else "Array is incorrect"])
+    (cond[(checkRecord) "Record is correct"] [else "Record is incorrect"])
+    (cond[(checkComp) "Comparison is correct"] [else "Comparison is incorrect"])
+    (cond[(checkPred) "Predicate is correct"] [else "Predicate is incorrect"])
+    (cond[(checkLogic) "Logic is correct"] [else "Logic is incorrect"])
+}
+
 (define checkLetSet ()) {
     (let v:Integer 6)
     (let a:Boolean (equal v 6))
@@ -7,7 +20,7 @@
 }
 
 (define checkCond ()) {
-    (cond [true true] [else false])
+    (return (cond [true true] [else false]))
 }
 
 (define checkFor ()) {
@@ -46,19 +59,59 @@
 
 (define checkArray ()) {
     (let ar:Array (array 1 2 3 4 5))
-    (let a:Boolean (equal (array-get ar 1) 3))
-    (set ar (array-rem ar 1))
-    (let b:Boolean (equal (array-get ar 1) 4))
-    (set ar (array-add ar 1 9))
-    (let c:Boolean (equal (array-get ar 1) 9))
-    (set ar (array-set ar 1 0))
-    (let d:Boolean (equal (array-get ar 1) 0))
+    (let a:Boolean (equal (array-get ar 2) 3))
+    (set ar (array-rem ar 2))
+    (let b:Boolean (equal (array-get ar 2) 4))
+    (set ar (array-add ar 2 9))
+    (let c:Boolean (equal (array-get ar 2) 9))
+    (set ar (array-set ar 2 0))
+    (let d:Boolean (equal (array-get ar 2) 0))
     (return (and a (and b (and c d))))
 }
 
-(checkLetSet)
-(checkCond)
-(checkFor)
-(checkArithmetic)
-(checkList)
-(checkArray)
+(define checkRecord()) {
+    (let rec:Record (record (#name "Dias") (#age "25") (#city "Innopolis")))
+    (let keys:List (record-keywords rec))
+    (let val:List (record-values rec))
+    (let a:Boolean (equal (head val) "25"))
+    (let b:Boolean (equal (tail val) "Dias"))
+    (let one:String (record-field rec (head keys)))
+    (let c:Boolean (equal one "25"))
+    (return (and a (and b c)))
+}
+
+(define checkComp()) {
+    (let a:Boolean (equal 1 1))
+    (let b:Boolean (nonequal 1 1))
+    (let c:Boolean (less 5 1))
+    (let d:Boolean (lesseq 3 7))
+    (let e:Boolean (greater 5 2))
+    (let f:Boolean (greatereq 4 4))
+    (return (and a (and (not b) (and (not c) (and d (and e f))))))
+}
+
+(define checkPred ()) {
+    (let a:Boolean (isint 5.5))
+    (let b:Boolean (isint 4))
+    (let c:Boolean (isreal 5.0))
+    (let d:Boolean (isbool true))
+    (let e:Boolean (islist (array 3 4 5)))
+    (let f:Boolean (isstring "true"))
+    (return (and (not a) (and b (and c (and d (and (not e) f))))))
+}
+
+(define checkLogic ()) {
+    (let a:Boolean (or true false))
+    (let b:Boolean (or true true))
+    (let c:Boolean (or false false))
+    (let d:Boolean (and true false))
+    (let e:Boolean (and true true))
+    (let f:Boolean (and false false))
+    (let g:Boolean (not true))
+    (let h:Boolean (not false))
+    (let i:Boolean (or false true))
+    (let j:Boolean (and false true))
+    (return (and a (and b (and (not c) (and (not d) (and e (and (not f) (and (not g) (and h (and i (not j)))))))))))
+}
+
+(correctTests)

@@ -153,7 +153,7 @@ Token getNextToken(std::ifstream *file, int *curLine, int *curPos) {
     } else if (tokenLetters == "Array") {
         token.code = tokenType;
         token.value.stringVal = tokenLetters;
-    } else if (tokenLetters == "Keyword") {
+    } else if (tokenLetters == "Record") {
         token.code = tokenType;
         token.value.stringVal = tokenLetters;
     } else if (tokenLetters == "array") {

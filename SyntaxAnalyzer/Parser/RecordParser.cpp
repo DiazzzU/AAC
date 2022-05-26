@@ -16,8 +16,9 @@ Node* RecordParser(Parser *parser, int *tokenNumber) {
             if (parser->GetToken(*tokenNumber).code != tokenString) {
                 parser->ErrorMessage(parser->GetToken(*tokenNumber).location.line, parser->GetToken(*tokenNumber).location.position, "Expected Keyword");
             }
-
-            nodeRecord->addRecordVal(parser->GetToken(*tokenNumber).value.stringVal, ElementParser(parser, tokenNumber));
+            std::string keyword = parser->GetToken(*tokenNumber).value.stringVal;
+            (*tokenNumber) ++;
+            nodeRecord->addRecordVal(keyword, ElementParser(parser, tokenNumber));
             
             if (parser->GetToken(*tokenNumber).code != tokenCloseParenthesis) {
                 parser->ErrorMessage(parser->GetToken(*tokenNumber).location.line, parser->GetToken(*tokenNumber).location.position, "Expected )");
@@ -28,14 +29,10 @@ Node* RecordParser(Parser *parser, int *tokenNumber) {
         return nodeRecord;
     }
     NodeInvocation* nodeRecordOp = new NodeInvocation();
-    nodeRecordOp->setName(parser->GetToken(*tokenNumber).value.stringVal);
-    (*tokenNumber) ++;
+    nodeRecordOp->setName(currentToken.value.stringVal);
     nodeRecordOp->addParameter(ElementParser(parser, tokenNumber));
 
     if (currentToken.code == tokenRecordField) {
-        if (parser->GetToken(*tokenNumber).code != tokenString) {
-             parser->ErrorMessage(parser->GetToken(*tokenNumber).location.line, parser->GetToken(*tokenNumber).location.position, "Expected Keyword");
-        }
         nodeRecordOp->addParameter(ElementParser(parser, tokenNumber));
     }
 

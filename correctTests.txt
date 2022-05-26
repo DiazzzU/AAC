@@ -1,4 +1,4 @@
-(define correctTests) {
+(define correctTests ()) {
     (cond[(checkLetSet) "Let ans set are correct"] [else "Let ans set are incorrect"])
     (cond[(checkCond) "Condition is correct"] [else "Condition is incorrect"])
     (cond[(checkArithmetic) "Arithmetic is correct"] [else "Arithmetic is incorrect"])
@@ -20,7 +20,7 @@
 }
 
 (define checkCond ()) {
-    (cond [true true] [else false])
+    (return (cond [true true] [else false]))
 }
 
 (define checkFor ()) {
@@ -59,13 +59,13 @@
 
 (define checkArray ()) {
     (let ar:Array (array 1 2 3 4 5))
-    (let a:Bool (equal (array-get ar 2) 3))
+    (let a:Boolean (equal (array-get ar 2) 3))
     (set ar (array-rem ar 2))
-    (let b:Bool (equal (array-get ar 2) 4))
+    (let b:Boolean (equal (array-get ar 2) 4))
     (set ar (array-add ar 2 9))
-    (let c:Bool (equal (array-get ar 2) 9))
+    (let c:Boolean (equal (array-get ar 2) 9))
     (set ar (array-set ar 2 0))
-    (let d:Bool (equal (array-get ar 2) 0))
+    (let d:Boolean (equal (array-get ar 2) 0))
     (return (and a (and b (and c d))))
 }
 
@@ -73,43 +73,45 @@
     (let rec:Record (record (#name "Dias") (#age "25") (#city "Innopolis")))
     (let keys:List (record-keywords rec))
     (let val:List (record-values rec))
-    (let a:Bool (equal (head val) "Dias"))
-    (let b:Bool (equal (tail val) "Innopolis"))
+    (let a:Boolean (equal (head val) "25"))
+    (let b:Boolean (equal (tail val) "Dias"))
     (let one:String (record-field rec (head keys)))
-    (let c:Bool (equal one "Dias"))
+    (let c:Boolean (equal one "25"))
     (return (and a (and b c)))
 }
 
 (define checkComp()) {
-    (let a:Bool (equal 1 1))
-    (let b:Bool (nonequal 1 1))
-    (let c:Bool (less 5 1))
-    (let d:Bool (lesseq 3 7))
-    (let e:Bool (greater 5 2))
-    (let f:Bool (greatereq 4 4))
+    (let a:Boolean (equal 1 1))
+    (let b:Boolean (nonequal 1 1))
+    (let c:Boolean (less 5 1))
+    (let d:Boolean (lesseq 3 7))
+    (let e:Boolean (greater 5 2))
+    (let f:Boolean (greatereq 4 4))
     (return (and a (and (not b) (and (not c) (and d (and e f))))))
 }
 
-(define checkPred()) {
-    (let a:Bool (isint 5.5))
-    (let b:Bool (isint 4))
-    (let c:Bool (isreal 5))
-    (let d:Bool (isbool true))
-    (let e:Bool (islist (array 3 4 5)))
-    (let f:Bool (isstring "true"))
+(define checkPred ()) {
+    (let a:Boolean (isint 5.5))
+    (let b:Boolean (isint 4))
+    (let c:Boolean (isreal 5.0))
+    (let d:Boolean (isbool true))
+    (let e:Boolean (islist (array 3 4 5)))
+    (let f:Boolean (isstring "true"))
     (return (and (not a) (and b (and c (and d (and (not e) f))))))
 }
 
-(define checkLogic()) {
-    (let a:Bool (or true false))
-    (let b:Bool (or true true))
-    (let c:Bool (or false false))
-    (let d:Bool (and true false))
-    (let e:Bool (and true true))
-    (let f:Bool (and false false))
-    (let g:Bool (not true))
-    (let h:Bool (not false))
-    (let i:Bool (or false true))
-    (let j:Bool (and false true))
+(define checkLogic ()) {
+    (let a:Boolean (or true false))
+    (let b:Boolean (or true true))
+    (let c:Boolean (or false false))
+    (let d:Boolean (and true false))
+    (let e:Boolean (and true true))
+    (let f:Boolean (and false false))
+    (let g:Boolean (not true))
+    (let h:Boolean (not false))
+    (let i:Boolean (or false true))
+    (let j:Boolean (and false true))
     (return (and a (and b (and (not c) (and (not d) (and e (and (not f) (and (not g) (and h (and i (not j)))))))))))
 }
+
+(correctTests)
