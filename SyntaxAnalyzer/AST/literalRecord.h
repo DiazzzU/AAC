@@ -6,6 +6,7 @@
 #include <map>
 #include "node.h"
 #include <SyntaxAnalyzer/AST/memory.h>
+#include <SyntaxAnalyzer/Semantics/Record.h>
 
 class RecordLiteral: public NodeLiteral {
 public:
@@ -24,19 +25,13 @@ public:
         this->recordVal[key] = val;
     }
 
-    Node* codegen(Memory* memory) {
-        return this;
-    }
-
-    void print() {
-        std::cout << "(record ";
+    Literal* codegen(Memory* memory) {
+        Record* node = new Record();
         for (auto x : recordVal) {
-            std::cout << x.first << ":";
-            x.second->print();
+            node->addRecordVal(x.first, x.second->codegen(memory));
         }
-        std::cout << ")";
+        return node;
     }
-
 };
 
 #endif

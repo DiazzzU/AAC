@@ -20,6 +20,19 @@ public:
     std::vector<Node*> getExpressions() {
         return expressions;
     }
+
+    Literal* codegen(Memory* memory) {
+        for (auto exp : expressions) {
+            Literal* element = exp->codegen(memory);
+            if (exp->getName() == "return") {
+                return element;
+            }
+            element->print();
+            if (element->getType() != "Literal") {
+                std::cout << '\n';
+            }
+        }
+    }
 };
 
 #endif 

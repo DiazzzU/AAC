@@ -18,8 +18,22 @@ public:
         return expression;
     }
 
-    void setExpression(Node* expression) {
-        this->expression = expression;
+    void setExpression(Node* x) {
+        this->expression = x;
+    }
+
+    Literal* codegen(Memory* memory) {
+        Literal* element = expression->codegen(memory);
+        if (type != "Any" && element->getType() != type) {
+            std::cout << "TypeError";
+            exit(0);
+        }
+        if (memory->variables.count(name)) {
+            std::cout << "Variable with name " << name << "already exist\n";
+            exit(0);
+        }
+        memory->variables[name] = element;
+        return new Literal();
     }
 };
 

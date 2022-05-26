@@ -68,6 +68,8 @@ Token getNextToken(std::ifstream *file, int *curLine, int *curPos) {
         token.code = tokenLet;
     } else if (tokenLetters == "define") {
         token.code = tokenDefine;
+    } else if (tokenLetters == "return") {
+        token.code = tokenReturn;
     } else if (tokenLetters == "cond") {
         token.code = tokenCond;
     } else if (tokenLetters == "for") {
@@ -94,6 +96,8 @@ Token getNextToken(std::ifstream *file, int *curLine, int *curPos) {
         token.code = tokenIsBool;
     } else if (tokenLetters == "islist") {
         token.code = tokenIsList;
+    } else if (tokenLetters == "isstring") {
+        token.code = tokenIsString;
     } else if (tokenLetters == "and") {
         token.code = tokenAnd;
     } else if (tokenLetters == "or") {
@@ -170,10 +174,16 @@ Token getNextToken(std::ifstream *file, int *curLine, int *curPos) {
         token.code = tokenRecordValues;
     } else if (tokenLetters == "record-field") {
          token.code = tokenRecordField;
-    } else if (isdigit(tokenLetters[0])) {
+    } else if (tokenLetters == "read-line") {
+        token.code = tokenReadLine;   
+    } else if (isdigit(tokenLetters[0]) || tokenLetters[0] == '-') {
+        bool minus = false;
         bool real = false;
         bool integer = true;
-        for (int i = 0; i < tokenLetters.size(); i++) {
+        if(tokenLetters[0] == '-') {
+            minus = true;
+        }
+        for (int i = minus; i < tokenLetters.size(); i++) {
             if (tokenLetters[i] == '.') {
                 real = true;
                 continue;
@@ -186,6 +196,7 @@ Token getNextToken(std::ifstream *file, int *curLine, int *curPos) {
         } else if (integer) {
             token.code = tokenInt;
             token.value.intVal = stoi(tokenLetters);
+
         } else {
             token.code = tokenString;
             token.value.stringVal = tokenLetters;

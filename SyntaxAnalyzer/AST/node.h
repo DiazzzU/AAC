@@ -6,6 +6,7 @@
 #include <iostream>
 #include <map>
 #include <SyntaxAnalyzer/AST/memory.h>
+#include <SyntaxAnalyzer/Semantics/Literal.h>
 
 class Node {
 public:
@@ -53,6 +54,9 @@ public:
     virtual std::map < std::string, Node*> getRecordVal() {
         return std::map < std::string, Node*>();
     }
+    virtual std::string getInvocType() {
+        return "";
+    }
 
     virtual void setDeclaration(Node* node){
         
@@ -96,8 +100,11 @@ public:
     virtual void addRecordVal(std::string key, Node* val){
 
     }
+    virtual void setInvocType(std::string x){
+        
+    }
 
-    virtual Node* codegen(Memory* memory) {
+    virtual Literal* codegen(Memory* memory) {
         return NULL;
     };
     virtual void print() {

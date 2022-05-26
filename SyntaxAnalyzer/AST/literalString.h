@@ -5,6 +5,7 @@
 #include <vector>
 #include "node.h"
 #include <SyntaxAnalyzer/AST/memory.h>
+#include <SyntaxAnalyzer/Semantics/String.h>
 
 class StringLiteral: public NodeLiteral {
 public:
@@ -24,14 +25,11 @@ public:
         this->stringVal = x;
     }
 
-    Node* codegen(Memory* memory) {
-        return this;
+    Literal* codegen(Memory* memory) {
+        String* node = new String();
+        node->setStringVal(stringVal);
+        return node;
     }
-
-    void print() {
-        std::cout << "\"" << stringVal << "\"";
-    }
-
 };
 
 #endif

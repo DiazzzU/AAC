@@ -7,6 +7,12 @@ Node* ParameterParser(Parser *parser, int *tokenNumber){
     }
     nodeParameter->setName(parser->GetToken(*tokenNumber).value.stringVal);
     (*tokenNumber) ++;
+
+    if (parser->GetToken(*tokenNumber).code != tokenSemicolon) {
+        parser->ErrorMessage(parser->GetToken(*tokenNumber).location.line, parser->GetToken(*tokenNumber).location.position, "Expected :");
+    }
+    (*tokenNumber) ++;
+
     if (parser->GetToken(*tokenNumber).code != tokenType) {
         parser->ErrorMessage(parser->GetToken(*tokenNumber).location.line, parser->GetToken(*tokenNumber).location.position, "Expected type");
     }

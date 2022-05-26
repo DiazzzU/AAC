@@ -64,7 +64,8 @@ enum Code {
     tokenReadLine,
     tokenDoubleQuote,
     tokenSemicolon,
-    tokenRightArrow
+    tokenRightArrow,
+    tokenReturn
 };
 
 struct Location {
@@ -94,6 +95,8 @@ const std::string TokenEnumNames [] = {
     [tokenCloseParenthesis] = "tokenCloseParenthesis",
     [tokenOpenSquareBracket] = "tokenOpenSquareBracket",
     [tokenCloseSquareBracket] = "tokenCloseSquareBracket",
+    [tokenOpenCurlyBracket] = "tokenOpenCurlyBracket",
+    [tokenCloseCurlyBracket] = "tokenCloseCurlyBracket",
     [tokenSet] = "tokenSet",
     [tokenLet] = "tokenLet",
     [tokenDefine] = "tokenDefine",
@@ -144,7 +147,8 @@ const std::string TokenEnumNames [] = {
     [tokenReadLine] = "tokenReadLine",
     [tokenDoubleQuote] = "tokenDoubleQuote",
     [tokenSemicolon] = "tokenSemicolon",
-    [tokenRightArrow] = "tokenRightArrow"
+    [tokenRightArrow] = "tokenRightArrow",
+    [tokenReturn] = "tokenReturn"
 };
 
 #endif

@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "node.h"
+#include <SyntaxAnalyzer/Semantics/List.h>
 
 class ListLiteral: public NodeLiteral {
 public:
@@ -22,16 +23,14 @@ public:
         this->listVal.push_back(val);
     }
 
-    Node* codegen(Memory* memory) {
-        return this;
-    }
-    void print() {
-        std::cout << "'(";
+    Literal* codegen(Memory* memory) {
+        List* node = new List();
+
         for (auto x : listVal) {
-            x->print();
-            std::cout << ' ';
+            Literal* element = x->codegen(memory);
+            node->addListVal(element);
         }
-        std::cout << ")";
+        return node;
     }
 
 };

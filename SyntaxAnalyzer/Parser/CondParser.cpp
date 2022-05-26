@@ -22,11 +22,12 @@ Node* CondParser(Parser *parser, int *tokenNumber){
             condition = false;
         }
 
-        nodeCond->addExpression(ElementParser(parser, tokenNumber));
-        nodeCond->addExpression(ElementParser(parser, tokenNumber));
+        nodeCond->addParameter(ElementParser(parser, tokenNumber));
+        nodeCond->addParameter(ElementParser(parser, tokenNumber));
         if (parser->GetToken(*tokenNumber).code != tokenCloseSquareBracket) {
             parser->ErrorMessage(parser->GetToken(*tokenNumber).location.line, parser->GetToken(*tokenNumber).location.position, "Expected ]");
         }
+        (*tokenNumber) ++;
     }
     (*tokenNumber) ++;
     return nodeCond;

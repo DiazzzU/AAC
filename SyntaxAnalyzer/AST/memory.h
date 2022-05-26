@@ -6,12 +6,13 @@
 #include <map>
 
 #include <SyntaxAnalyzer/AST/node.h>
+#include <SyntaxAnalyzer/Semantics/Literal.h>
 
 class Node;
 
 class Memory {
 public:
-    std::map < std::string, Node*> variables;
+    std::map < std::string, Literal*> variables;
     std::map < std::string, Node*> functions;
 };
 

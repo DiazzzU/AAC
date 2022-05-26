@@ -5,6 +5,7 @@
 #include <vector>
 #include "node.h"
 #include <SyntaxAnalyzer/AST/memory.h>
+#include <SyntaxAnalyzer/Semantics/Real.h>
 
 class RealLiteral: public NodeLiteral {
 public:
@@ -24,10 +25,11 @@ public:
         this->realVal = x;
     }
 
-    void print() {
-        std::cout << realVal;
+    Literal* codegen(Memory* memory) {
+        Real* node = new Real();
+        node->setRealVal(realVal);
+        return node;
     }
-
 };
 
 #endif

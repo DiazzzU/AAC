@@ -29,17 +29,16 @@ Node* DefineParser(Parser *parser, int *tokenNumber) {
     }
 
     (*tokenNumber) ++;
-    if (parser->GetToken(*tokenNumber).code != tokenRightArrow) {
-        parser->ErrorMessage(parser->GetToken(*tokenNumber).location.line, parser->GetToken(*tokenNumber).location.position, "Expected ->");
+
+    if (parser->GetToken(*tokenNumber).code == tokenRightArrow) {
+        (*tokenNumber) ++;
+        if (parser->GetToken(*tokenNumber).code != tokenType) {
+            parser->ErrorMessage(parser->GetToken(*tokenNumber).location.line, parser->GetToken(*tokenNumber).location.position, "Expected Type");
+        }
+        nodeDefine->setType(parser->GetToken(*tokenNumber).value.stringVal);
+        (*tokenNumber) ++;
     }
 
-    (*tokenNumber) ++;
-    if (parser->GetToken(*tokenNumber).code != tokenType) {
-        parser->ErrorMessage(parser->GetToken(*tokenNumber).location.line, parser->GetToken(*tokenNumber).location.position, "Expected Type");
-    }
-    nodeDefine->setType(parser->GetToken(*tokenNumber).value.stringVal);
-
-    (*tokenNumber) ++;
     if (parser->GetToken(*tokenNumber).code != tokenOpenCurlyBracket) {
         parser->ErrorMessage(parser->GetToken(*tokenNumber).location.line, parser->GetToken(*tokenNumber).location.position, "Expected {");
     }

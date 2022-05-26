@@ -5,6 +5,7 @@
 #include <vector>
 #include "node.h"
 #include <SyntaxAnalyzer/AST/memory.h>
+#include <SyntaxAnalyzer/Semantics/Boolean.h>
 
 class BooleanLiteral: public NodeLiteral {
 public:
@@ -24,13 +25,11 @@ public:
         this->booleanVal = x;
     }
 
-    Node* codegen(Memory* memory) {
-        return this;
+    Literal* codegen(Memory* memory) {
+        Boolean* node = new Boolean();
+        node->setBooleanVal(booleanVal);
+        return node;
     }
-    void print() {
-        std::cout << booleanVal;
-    }
-
 };
 
 #endif

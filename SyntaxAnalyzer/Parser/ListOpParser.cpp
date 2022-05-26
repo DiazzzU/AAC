@@ -11,6 +11,7 @@ Node* ListOpParser(Parser *parser, int *tokenNumber) {
     }
     NodeInvocation* nodeListOp = new NodeInvocation();
     nodeListOp->setName(currentToken.value.stringVal);
+    (*tokenNumber) ++;
     nodeListOp->addParameter(ElementParser(parser, tokenNumber));
 
     if (currentToken.code == tokenAppend) {

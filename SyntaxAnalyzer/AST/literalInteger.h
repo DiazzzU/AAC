@@ -5,6 +5,7 @@
 #include <vector>
 #include "node.h"
 #include <SyntaxAnalyzer/AST/memory.h>
+#include <SyntaxAnalyzer/Semantics/Integer.h>
 
 class IntegerLiteral: public NodeLiteral {
 public:
@@ -24,8 +25,10 @@ public:
         this->intVal = x;
     }
 
-    Node* codegen(Memory* memory) {
-        return this;
+    Literal* codegen(Memory* memory) {
+        Integer* node = new Integer();
+        node->setIntVal(intVal);
+        return node;
     }
     void print() {
         std::cout << intVal;

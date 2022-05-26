@@ -5,6 +5,7 @@
 #include <vector>
 #include "node.h"
 #include <SyntaxAnalyzer/AST/memory.h>
+#include <SyntaxAnalyzer/Semantics/Array.h>
 
 class ArrayLiteral: public NodeLiteral {
 public:
@@ -23,16 +24,21 @@ public:
         this->arrayVal.push_back(val);
     }
 
-    Node* codegen(Memory* memory) {
-        return this;
-    }
-    void print() {
-        std::cout << "'[";
+    Literal* codegen(Memory* memory) {
+        Array* node = new Array();
+
+        std::string curType = "";
+
         for (auto x : arrayVal) {
-            x->print();
-            std::cout << ' ';
+            Literal* element = x->codegen(memory);
+            if (curType != "" && curType != element->getType()) {
+                std::cout << "TypeError";
+                exit(0);
+            }
+            curType = element->getType();
+            node->addArrayVal(element);
         }
-        std::cout << "]";
+        return node;
     }
 };
 
